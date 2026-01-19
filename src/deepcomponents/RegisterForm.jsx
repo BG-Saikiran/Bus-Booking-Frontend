@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import api from "../api/axios";
-
+import React, { useState } from "react"
+import api from "../api/axios"
 
 const RegisterForm = () => {
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    email: "",
+    password: "",
   })
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (e) => {
@@ -19,12 +18,12 @@ const RegisterForm = () => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      await api.post("/api/register/", form);
-      setMessage('Registration successful! You can now login.')
-      setForm({ username: '', email: '', password: '' })
+      await api.post("/api/register/", form)
+      setMessage("Registration successful! You can now login.")
+      setForm({ username: "", email: "", password: "" })
     } catch (error) {
       setMessage(
-        'Registration failed: ' +
+        "Registration failed: " +
           (error.response?.data?.username ||
             error.response?.data?.email ||
             error.message)
@@ -36,27 +35,27 @@ const RegisterForm = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center text-white relative"
+      className="min-h-screen flex items-center justify-center relative px-4"
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1509749837427-ac94a2553d0e')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-indigo-900/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-indigo-900/60" />
 
-      {/* Register Content */}
-      <div className="relative z-10 w-full max-w-md text-center px-6">
-
-        <h1 className="text-3xl font-semibold mb-2">Create Account</h1>
-        <p className="text-sm text-white/80 mb-8">
+      {/* Register Card */}
+      <div className="relative z-10 w-full max-w-sm sm:max-w-md text-center text-white">
+        <h1 className="text-2xl sm:text-3xl font-semibold mb-2">
+          Create Account
+        </h1>
+        <p className="text-xs sm:text-sm text-white/80 mb-6 sm:mb-8">
           Start your journey with us
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           {/* Username */}
           <input
             type="text"
@@ -65,10 +64,10 @@ const RegisterForm = () => {
             value={form.username}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3 rounded-full 
-                       bg-white/20 backdrop-blur-lg 
-                       placeholder-white/70 text-white
-                       focus:outline-none focus:ring-2 focus:ring-white/60"
+            className="w-full px-5 py-3 sm:py-3.5 rounded-full
+              bg-white/20 backdrop-blur-lg
+              placeholder-white/70 text-white text-sm sm:text-base
+              focus:outline-none focus:ring-2 focus:ring-white/60"
           />
 
           {/* Email */}
@@ -79,10 +78,10 @@ const RegisterForm = () => {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3 rounded-full 
-                       bg-white/20 backdrop-blur-lg 
-                       placeholder-white/70 text-white
-                       focus:outline-none focus:ring-2 focus:ring-white/60"
+            className="w-full px-5 py-3 sm:py-3.5 rounded-full
+              bg-white/20 backdrop-blur-lg
+              placeholder-white/70 text-white text-sm sm:text-base
+              focus:outline-none focus:ring-2 focus:ring-white/60"
           />
 
           {/* Password */}
@@ -93,19 +92,19 @@ const RegisterForm = () => {
             value={form.password}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3 rounded-full 
-                       bg-white/20 backdrop-blur-lg 
-                       placeholder-white/70 text-white
-                       focus:outline-none focus:ring-2 focus:ring-white/60"
+            className="w-full px-5 py-3 sm:py-3.5 rounded-full
+              bg-white/20 backdrop-blur-lg
+              placeholder-white/70 text-white text-sm sm:text-base
+              focus:outline-none focus:ring-2 focus:ring-white/60"
           />
 
           {/* Message */}
           {message && (
             <p
-              className={`text-sm ${
-                message.includes('successful')
-                  ? 'text-green-300'
-                  : 'text-red-300'
+              className={`text-xs sm:text-sm ${
+                message.includes("successful")
+                  ? "text-green-300"
+                  : "text-red-300"
               }`}
             >
               {message}
@@ -116,14 +115,13 @@ const RegisterForm = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 rounded-full 
-                       bg-[#FFD3B6] text-gray-800 font-semibold
-                       hover:bg-[#ffc3a0] transition
-                       disabled:opacity-60"
+            className="w-full py-3 sm:py-3.5 rounded-full
+              bg-[#FFD3B6] text-gray-800 font-semibold text-sm sm:text-base
+              hover:bg-[#ffc3a0] transition
+              disabled:opacity-60"
           >
-            {isLoading ? 'Registering...' : 'REGISTER'}
+            {isLoading ? "Registering..." : "REGISTER"}
           </button>
-
         </form>
       </div>
     </div>
