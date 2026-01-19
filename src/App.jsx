@@ -6,6 +6,8 @@ import BusList from './deepcomponents/BusList'
 import BusSeats from './deepcomponents/BusSeats'
 import UserBookings from './deepcomponents/UserBooking'
 import Wrapper from './deepcomponents/Wrapper'
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 
 const App = () => {
@@ -41,6 +43,10 @@ const handleLogout = ()=>{
         <Route path='/my-bookings' element={<UserBookings token={token} userId={userId}/>} />
       </Routes>
       </Wrapper> */}
+    <ToastContainer position="top-center" autoClose={2000} newestOnTop
+    closeOnClick
+    pauseOnFocusLoss={false}
+    draggable/>  
     <Wrapper token={token} handleLogout={handleLogout}>
     <Routes>
         <Route path='/register' element={<RegisterForm />}/>

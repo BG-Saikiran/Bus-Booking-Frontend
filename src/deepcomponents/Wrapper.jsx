@@ -1,74 +1,91 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  FaBus,
+  FaTicketAlt,
+  FaSignOutAlt,
+  FaSignInAlt,
+  FaUserPlus,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from 'react-icons/fa'
 
 const Wrapper = ({ token, handleLogout, children }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const logout = () => {
-    handleLogout();
-    navigate('/login');
-  };
+    handleLogout()
+    navigate('/login')
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Navigation */}
-      <nav className="bg-white shadow-lg">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-white to-blue-100">
+
+      {/* NAVBAR */}
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            {/* Left side navigation */}
-            <div className="flex items-center space-x-8">
-              <Link 
-                to="/" 
-                className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+          <div className="flex justify-between items-center h-16">
+
+            {/* LEFT */}
+            <div className="flex items-center gap-8">
+              <Link
+                to="/"
+                className="flex flex-col leading-tight text-indigo-600 hover:text-indigo-800 transition"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-6 w-6 mr-2" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" 
-                  />
-                </svg>
-                <span className="text-xl font-bold">Spring Travels</span>
+                <div className="flex items-center gap-2 font-bold text-lg">
+                  <FaBus />
+                  BusWay Travels
+                </div>
+                <span className="text-xs text-gray-500">
+                  Safe • Fast • Affordable
+                </span>
               </Link>
-              
+
               {token && (
-                <Link 
-                  to='/my-bookings' 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-100 transition-colors"
+                <Link
+                  to="/my-bookings"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md
+                             text-sm font-medium text-gray-700
+                             hover:text-indigo-600 hover:bg-white/60 transition"
                 >
+                  <FaTicketAlt />
                   My Bookings
                 </Link>
               )}
             </div>
 
-            {/* Right side navigation */}
-            <div className="flex items-center space-x-4">
+            {/* RIGHT */}
+            <div className="flex items-center gap-3">
               {token ? (
-                <button 
+                <button
                   onClick={logout}
-                  className="px-4 py-2 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md
+                             bg-indigo-600 hover:bg-indigo-700 text-white
+                             text-sm font-medium transition"
                 >
+                  <FaSignOutAlt />
                   Logout
                 </button>
               ) : (
                 <>
-                  <Link 
-                    to="/register" 
-                    className="px-4 py-2 rounded-md text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                  <Link
+                    to="/register"
+                    className="flex items-center gap-2 px-4 py-2 rounded-md
+                               text-sm font-medium text-indigo-600
+                               hover:bg-indigo-100 transition"
                   >
+                    <FaUserPlus />
                     Register
                   </Link>
-                  <Link 
-                    to="/login" 
-                    className="px-4 py-2 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
+                  <Link
+                    to="/login"
+                    className="flex items-center gap-2 px-4 py-2 rounded-md
+                               bg-indigo-600 hover:bg-indigo-700 text-white
+                               text-sm font-medium transition"
                   >
+                    <FaSignInAlt />
                     Login
                   </Link>
                 </>
@@ -78,23 +95,72 @@ const Wrapper = ({ token, handleLogout, children }) => {
         </div>
       </nav>
 
-      {/* Main content */}
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div className="bg-white shadow-sm rounded-lg p-6">
+      {/* MAIN */}
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-white/40">
           {children}
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} TravelEase. All rights reserved.
-          </p>
+      {/* FOOTER */}
+      <footer className="bg-white/70 backdrop-blur border-t border-white/40">
+        <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-gray-600">
+
+          {/* About */}
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-3">BusWay Travels</h3>
+            <p>
+              Book bus tickets easily with real-time seat selection,
+              secure payments, and trusted operators across India.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-3">Quick Links</h3>
+            <ul className="space-y-2">
+              <li><Link to="/" className="hover:text-indigo-600">Home</Link></li>
+              <li><Link to="/my-bookings" className="hover:text-indigo-600">My Bookings</Link></li>
+              <li><Link to="/login" className="hover:text-indigo-600">Login</Link></li>
+              <li><Link to="/register" className="hover:text-indigo-600">Register</Link></li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-3">Support</h3>
+            <ul className="space-y-2">
+              <li>FAQs</li>
+              <li>Cancellation Policy</li>
+              <li>Terms & Conditions</li>
+              <li>Privacy Policy</li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-3">Contact Us</h3>
+            <div className="space-y-2">
+              <p className="flex items-center gap-2">
+                <FaPhoneAlt /> +91 98765 43210
+              </p>
+              <p className="flex items-center gap-2">
+                <FaEnvelope /> support@BusWaytravels.com
+              </p>
+              <p className="flex items-center gap-2">
+                <FaMapMarkerAlt /> Bengaluru, India
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center text-xs text-gray-500 pb-6">
+          © {new Date().getFullYear()} BusWay Travels. All rights reserved.
         </div>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default Wrapper;
+export default Wrapper
+// const res = await api.get(`/api/buses/`);
